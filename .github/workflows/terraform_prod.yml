@@ -3,7 +3,7 @@ name: 'Terraform prod'
 on:
   push:
     branches:
-    - develop
+    - main
   pull_request:
 
 jobs:
