@@ -1,4 +1,4 @@
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "tfc-demo-eu-west-1-664685189390"
+  bucket = "tfc-demo-${var.region}-664685189390"
   acl    = "private"
 }

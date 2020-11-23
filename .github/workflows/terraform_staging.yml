@@ -1,0 +1,38 @@
+name: 'Terraform staging'
+
+on:
+  push:
+    branches:
+    - develop
+  pull_request:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform Init
+      run: terraform init -backend-config=environment/backend_staging.hcl
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -var-file environment/staging.tfvars
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+      run: terraform apply -var-file environment/staging.tfvars -auto-approve
