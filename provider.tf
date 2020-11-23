@@ -6,5 +6,11 @@ terraform {
   required_providers {
     aws = "3.16.0"
   }
-  backend "s3" {}
+  backend "remote" {
+    organization = "jeremietharaud"
+
+    workspaces {
+      name = "tfc-demo-dev"
+    }
+  }
 }
