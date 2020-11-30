@@ -1,6 +1,6 @@
-# Terraform Cloud Demo
-
 ![Terraform](https://github.com/jeremietharaud/tfc-demo/workflows/Terraform/badge.svg)
+
+# Terraform Cloud Demo
 
 ### How this repository works
 
