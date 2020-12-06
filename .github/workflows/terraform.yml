@@ -25,6 +25,19 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+    - name: Setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+  
+    - name: Install dependencies
+      run: |
+        pip install checkov
+
+    - name: Checkov
+      run: |
+        checkov -d .
+
     - name: Terraform Init on staging
       if: github.ref == 'refs/heads/develop'
       run: terraform init -backend-config=environment/backend_staging.hcl
