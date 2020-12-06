@@ -36,7 +36,7 @@ jobs:
 
     - name: Checkov
       run: |
-        checkov -d .
+        checkov -d . --skip-check CKV_AWS_18,CKV_AWS_52
 
     - name: Terraform Init on staging
       if: github.ref == 'refs/heads/develop'
